@@ -14,7 +14,7 @@ namespace GogsBoard
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+                .UseWebRoot(".")
                 .UseStartup<Startup>()
                 .Build();
 

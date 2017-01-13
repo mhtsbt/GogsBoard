@@ -18,7 +18,7 @@ var RepoService = (function () {
     RepoService.prototype.listRepo = function () {
         var service = this;
         return Rx_1.Observable.create(function (observable) {
-            service.http.get("https://git.blinkingled.be/api/v1/user/repos").subscribe(function (res) {
+            service.http.get("https://git.blinkingled.be/api/v1/user/repos?token=" + config.token).subscribe(function (res) {
                 observable.next(res.json());
             });
         });

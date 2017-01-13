@@ -1,0 +1,20 @@
+<div class="ui padded container" style="margin-top:50px;margin-bottom:50px;">
+<div class="ui grid">
+
+    <div class="four wide column" *ngFor="let repo of repos">
+        <div class="ui card">
+
+            <div class="content">
+                <div class="header">{{repo.full_name}}</div>
+                <div class="meta">{{repo.updated_at}}</div>
+                <div class="description">
+                    <p>desc</p>
+                </div>
+            </div>
+            <div class="extra content">
+                <i class="idea icon"></i> {{repo.open_issues_count}} Issues
+            </div>
+        </div>
+    </div>
+</div>
+</div>

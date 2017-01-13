@@ -12,14 +12,16 @@ var core_1 = require("@angular/core");
 var RepoService_1 = require('../Services/RepoService');
 var GogsBoardComponent = (function () {
     function GogsBoardComponent(repoService) {
+        var ctrl = this;
         repoService.listRepo().subscribe(function (repos) {
+            ctrl.repos = repos;
             console.log(repos);
         });
     }
     GogsBoardComponent = __decorate([
         core_1.Component({
             selector: "gogs-board",
-            template: "test"
+            templateUrl: "./App/Components/RepoList.html"
         }), 
         __metadata('design:paramtypes', [RepoService_1.RepoService])
     ], GogsBoardComponent);

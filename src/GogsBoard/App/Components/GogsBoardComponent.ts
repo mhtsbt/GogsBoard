@@ -4,7 +4,7 @@ import { RepoService } from '../Services/RepoService';
 
 @Component({
     selector: "gogs-board",
-    template: "test"
+    templateUrl: "./App/Components/RepoList.html"
 })
 export class GogsBoardComponent {
 
@@ -12,8 +12,10 @@ export class GogsBoardComponent {
 
     constructor(repoService: RepoService) {
 
-        repoService.listRepo().subscribe(function (repos) {
+        var ctrl = this;
 
+        repoService.listRepo().subscribe(function (repos) {
+            ctrl.repos = repos;
             console.log(repos);
         });
 

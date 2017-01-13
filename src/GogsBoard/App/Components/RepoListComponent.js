@@ -9,17 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var GogsBoardComponent = (function () {
-    function GogsBoardComponent() {
+var RepoService_1 = require('../Services/RepoService');
+var RepoListComponent = (function () {
+    function RepoListComponent(repoService) {
+        var ctrl = this;
+        repoService.listRepo().subscribe(function (repos) {
+            ctrl.repos = repos;
+            console.log(repos);
+        });
     }
-    GogsBoardComponent = __decorate([
+    RepoListComponent = __decorate([
         core_1.Component({
-            selector: "gogs-board",
-            templateUrl: "./App/Components/GogsBoardComponent.html"
+            selector: "repo-list",
+            templateUrl: "./App/Components/RepoListComponent.html"
         }), 
-        __metadata('design:paramtypes', [])
-    ], GogsBoardComponent);
-    return GogsBoardComponent;
+        __metadata('design:paramtypes', [RepoService_1.RepoService])
+    ], RepoListComponent);
+    return RepoListComponent;
 }());
-exports.GogsBoardComponent = GogsBoardComponent;
-//# sourceMappingURL=GogsBoardComponent.js.map
+exports.RepoListComponent = RepoListComponent;
+//# sourceMappingURL=RepoListComponent.js.map

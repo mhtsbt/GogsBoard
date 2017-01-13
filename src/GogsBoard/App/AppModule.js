@@ -11,15 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
+var router_1 = require('@angular/router');
 var GogsBoardComponent_1 = require('./Components/GogsBoardComponent');
+var RepoBoardComponent_1 = require('./Components/RepoBoardComponent');
+var RepoListComponent_1 = require('./Components/RepoListComponent');
 var RepoService_1 = require('./Services/RepoService');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-            declarations: [GogsBoardComponent_1.GogsBoardComponent],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, router_1.RouterModule.forRoot([
+                    { path: '', component: RepoListComponent_1.RepoListComponent },
+                    { path: 'repo/:id', component: RepoBoardComponent_1.RepoBoardComponent }
+                ])],
+            declarations: [GogsBoardComponent_1.GogsBoardComponent, RepoListComponent_1.RepoListComponent, RepoBoardComponent_1.RepoBoardComponent],
             bootstrap: [GogsBoardComponent_1.GogsBoardComponent],
             providers: [RepoService_1.RepoService]
         }), 

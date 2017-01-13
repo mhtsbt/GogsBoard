@@ -1,11 +1,10 @@
-<div class="ui padded container" style="margin-top:50px;margin-bottom:50px;">
 <div class="ui grid">
 
     <div class="four wide column" *ngFor="let repo of repos">
         <div class="ui card">
 
             <div class="content">
-                <div class="header">{{repo.full_name}}</div>
+                <div class="header"><a routerLink="repo/{{repo.id}}">{{repo.full_name}}</a></div>
                 <div class="meta">{{repo.updated_at}}</div>
                 <div class="description">
                     <p>desc</p>
@@ -16,5 +15,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

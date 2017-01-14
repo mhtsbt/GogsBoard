@@ -2,58 +2,34 @@
 
     <div class="four wide column" style="text-align:center;">
 
-<div class="ui blue label">Backlog</div>
+        <div class="ui blue label">Backlog</div>
 
-</div>
-
-<div class="four wide column" style="text-align:center;">
-
-<div class="ui red label">In progress</div>
-
-</div>
-
-<div class="four wide column" style="text-align:center;">
-
-<div class="ui yellow label">Testable</div>
-
-</div>
-
-<div class="four wide column" style="text-align:center;">
-
-<div class="ui green label">Done</div>
-
-</div>
-
-<div class="four wide column">
-    <div class="ui card">
-
-        <div class="content">
-            <div class="header"><a routerLink="repo/"></a></div>
-            <div class="meta"></div>
-            <div class="description">
-                <p>desc</p>
-            </div>
-        </div>
-        <div class="extra content">
-            <i class="idea icon"></i>  Issues
-        </div>
     </div>
-</div>
+
+    <div class="four wide column" style="text-align:center;">
+
+        <div class="ui red label">In progress</div>
+
+    </div>
+
+    <div class="four wide column" style="text-align:center;">
+
+        <div class="ui yellow label">Testable</div>
+
+    </div>
+
+    <div class="four wide column" style="text-align:center;">
+
+        <div class="ui green label">Done</div>
+
+    </div>
 
     <div class="four wide column">
-        <div class="ui card">
+        <issue class="ui card blue" dnd-draggable [dragEnabled]="true" [dragData]="issue" *ngFor="let issue of backlogIssues" [issueData]="issue"></issue>
+    </div>
 
-            <div class="content">
-                <div class="header"><a routerLink="repo/"></a></div>
-                <div class="meta"></div>
-                <div class="description">
-                    <p>desc</p>
-                </div>
-            </div>
-            <div class="extra content">
-                <i class="idea icon"></i>  Issues
-            </div>
-        </div>
+    <div class="four wide column" dnd-droppable (onDropSuccess)="receiveIssue($event,progressIssues)">
+        <issue class="ui card red" dnd-draggable [dragEnabled]="true" [dragData]="issue" *ngFor="let issue of progressIssues" [issueData]="issue"></issue>
     </div>
 
     <div class="four wide column">
@@ -86,6 +62,6 @@
                 <i class="idea icon"></i>  Issues
             </div>
         </div>
-    </div>   
+    </div>
 
 </div>

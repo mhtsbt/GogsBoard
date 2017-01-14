@@ -1,0 +1,6 @@
+﻿<div class="content">
+    <div class="header">{{issueData.title}}</div>
+</div>
+<div class="extra content" *ngIf="issueData.assignee">
+    <i class="icon user"></i>  {{issueData.assignee.username}}
+</div>

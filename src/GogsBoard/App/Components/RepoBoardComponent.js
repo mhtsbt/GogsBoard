@@ -10,16 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var RepoService_1 = require('../Services/RepoService');
+var router_1 = require('@angular/router');
 var RepoBoardComponent = (function () {
-    function RepoBoardComponent(repoService) {
+    function RepoBoardComponent(repoService, route) {
+        this.repoService = repoService;
+        this.route = route;
+        this.backlogIssues = [];
+        this.progressIssues = [];
         var ctrl = this;
+        this.route.params.subscribe(function (params) {
+            ctrl.owner = params['owner'];
+            ctrl.repo = params['repo'];
+        });
+        ctrl.repoService.getIssues(ctrl.owner, ctrl.repo).subscribe(function (issues) {
+            ctrl.backlogIssues = issues;
+        });
     }
+    RepoBoardComponent.prototype.receiveIssue = function (event, destination) {
+        var ctrl = this;
+        var issue = event.dragData;
+        var backlogIndex = ctrl.backlogIssues.indexOf(issue);
+        if (backlogIndex) {
+            ctrl.backlogIssues.splice(backlogIndex, 1);
+        }
+        destination.push(issue);
+    };
     RepoBoardComponent = __decorate([
         core_1.Component({
             selector: "repo-board",
             templateUrl: "./App/Components/RepoBoardComponent.html"
         }), 
-        __metadata('design:paramtypes', [RepoService_1.RepoService])
+        __metadata('design:paramtypes', [RepoService_1.RepoService, router_1.ActivatedRoute])
     ], RepoBoardComponent);
     return RepoBoardComponent;
 }());

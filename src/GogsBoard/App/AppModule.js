@@ -12,10 +12,13 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
+var ng2_dnd_1 = require('ng2-dnd');
 var GogsBoardComponent_1 = require('./Components/GogsBoardComponent');
 var RepoBoardComponent_1 = require('./Components/RepoBoardComponent');
 var RepoListComponent_1 = require('./Components/RepoListComponent');
+var IssueComponent_1 = require('./Components/IssueComponent');
 var RepoService_1 = require('./Services/RepoService');
+var ConfigService_1 = require('./Services/ConfigService');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,11 +26,11 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule, router_1.RouterModule.forRoot([
                     { path: '', component: RepoListComponent_1.RepoListComponent },
-                    { path: 'repo/:id', component: RepoBoardComponent_1.RepoBoardComponent }
-                ])],
-            declarations: [GogsBoardComponent_1.GogsBoardComponent, RepoListComponent_1.RepoListComponent, RepoBoardComponent_1.RepoBoardComponent],
+                    { path: 'repo/:owner/:repo', component: RepoBoardComponent_1.RepoBoardComponent }
+                ]), ng2_dnd_1.DndModule.forRoot()],
+            declarations: [GogsBoardComponent_1.GogsBoardComponent, RepoListComponent_1.RepoListComponent, RepoBoardComponent_1.RepoBoardComponent, IssueComponent_1.IssueComponent],
             bootstrap: [GogsBoardComponent_1.GogsBoardComponent],
-            providers: [RepoService_1.RepoService]
+            providers: [RepoService_1.RepoService, ConfigService_1.ConfigService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

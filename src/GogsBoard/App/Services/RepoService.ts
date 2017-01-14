@@ -3,12 +3,12 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 
-declare var config;
+import {ConfigService} from './ConfigService';
 
 @Injectable()
 export class RepoService {
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private configService: ConfigService) {
 
     }
 
@@ -18,9 +18,30 @@ export class RepoService {
 
         return Observable.create(observable => {
 
-            service.http.get("https://git.blinkingled.be/api/v1/user/repos?token=" + config.token).subscribe(res => {
-                observable.next(res.json());
+            service.configService.getConfig().subscribe(config => {
+
+                service.http.get(config.gogsurl + "/api/v1/user/repos?token=" + config.gogstoken).subscribe(res => {
+                    observable.next(res.json());
+                });
             });
+        });
+
+    }
+
+    public getIssues(owner: string, repo: string) {
+
+        var service = this;
+
+        return Observable.create(observable => {
+
+            service.configService.getConfig().subscribe(config => {
+
+                service.http.get(config.gogsurl + "/api/v1/repos/" + owner + "/" + repo + "/issues?token=" + config.gogstoken).subscribe(res => {
+                    observable.next(res.json());
+                });
+
+            });
+
         });
 
     }

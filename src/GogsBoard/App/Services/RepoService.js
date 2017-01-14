@@ -11,21 +11,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Rx_1 = require('rxjs/Rx');
+var ConfigService_1 = require('./ConfigService');
 var RepoService = (function () {
-    function RepoService(http) {
+    function RepoService(http, configService) {
         this.http = http;
+        this.configService = configService;
     }
     RepoService.prototype.listRepo = function () {
         var service = this;
         return Rx_1.Observable.create(function (observable) {
-            service.http.get("https://git.blinkingled.be/api/v1/user/repos?token=" + config.token).subscribe(function (res) {
-                observable.next(res.json());
+            service.configService.getConfig().subscribe(function (config) {
+                service.http.get(config.gogsurl + "/api/v1/user/repos?token=" + config.gogstoken).subscribe(function (res) {
+                    observable.next(res.json());
+                });
+            });
+        });
+    };
+    RepoService.prototype.getIssues = function (owner, repo) {
+        var service = this;
+        return Rx_1.Observable.create(function (observable) {
+            service.configService.getConfig().subscribe(function (config) {
+                service.http.get(config.gogsurl + "/api/v1/repos/" + owner + "/" + repo + "/issues?token=" + config.gogstoken).subscribe(function (res) {
+                    observable.next(res.json());
+                });
             });
         });
     };
     RepoService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, ConfigService_1.ConfigService])
     ], RepoService);
     return RepoService;
 }());

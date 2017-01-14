@@ -15,6 +15,7 @@ namespace GogsBoard
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseWebRoot(".")
+                .UseUrls("http://*:5000")
                 .UseStartup<Startup>()
                 .Build();
 

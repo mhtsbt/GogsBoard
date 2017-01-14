@@ -1,5 +1,8 @@
 FROM mhtsbt/dotnet:1.1.0
 
+ADD ./src/GogsBoard/package.json /app/src/GogsBoard/package.json
+RUN cd /app/src/GogsBoard && npm install -y && npm install gulp -g -y
+
 COPY ./ /app/
 
 WORKDIR /app

@@ -24,7 +24,7 @@ namespace GogsBoard
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions();     
+            services.AddOptions();
             services.Configure<GogsBoardOptions>(_configuration);
             services.AddMvc();
         }
@@ -38,8 +38,6 @@ namespace GogsBoard
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
@@ -48,18 +46,7 @@ namespace GogsBoard
                   template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // required to let angular take over all the routes
-            //app.Use(async (context, next) =>
-            //{
-            //    await next.Invoke();
-
-            //    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-            //    {
-            //        context.Request.Path = "/index.html";
-            //        await next.Invoke();
-            //    }
-
-            //});
+            app.UseStaticFiles();
 
 
         }

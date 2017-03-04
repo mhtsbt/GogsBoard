@@ -1,0 +1,22 @@
+{
+  "name": "gogsboard",
+  "version": "1.0.0",
+  "description": "GogsBoard is a kanban board for Gogs",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"tsc -w -p src/GogsBoard\" \"cd src/GogsBoard && dotnet run\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhtsbt/GogsBoard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhtsbt/GogsBoard/issues"
+  },
+  "homepage": "https://github.com/mhtsbt/GogsBoard#readme",
+  "devDependencies": {
+    "concurrently": "^3.4.0"
+  }
+}

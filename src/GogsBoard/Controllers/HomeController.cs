@@ -13,7 +13,6 @@ namespace GogsBoard.Controllers
             return View();
         }
 
-
         [Route("repo/{user}/{project}")]
         public IActionResult ProjectPage()
         {

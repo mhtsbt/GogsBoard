@@ -9,6 +9,7 @@ import { RepoBoardComponent } from './Components/RepoBoardComponent';
 import { RepoListComponent } from './Components/RepoListComponent';
 import { IssueComponent } from './Components/IssueComponent';
 
+import { LabelService } from './Services/LabelService';
 import { RepoService } from './Services/RepoService';
 import { ConfigService } from './Services/ConfigService';
 
@@ -19,6 +20,6 @@ import { ConfigService } from './Services/ConfigService';
     ]), DndModule.forRoot()],
     declarations: [GogsBoardComponent, RepoListComponent, RepoBoardComponent, IssueComponent],
     bootstrap: [GogsBoardComponent],
-    providers: [RepoService, ConfigService]
+    providers: [RepoService,LabelService, ConfigService]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component } from "@angular/core"
 
 import { RepoService } from '../Services/RepoService';
+import { LabelService } from '../Services/LabelService';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,17 +17,21 @@ export class RepoBoardComponent {
     public owner;
     public repo;
 
-    constructor(private repoService: RepoService, private route: ActivatedRoute) {
+    constructor(private repoService: RepoService, private labelService: LabelService, private route: ActivatedRoute) {
 
         var ctrl = this;
 
         this.route.params.subscribe(params => {
+
             ctrl.owner = params['owner'];
             ctrl.repo = params['repo'];
-        });
 
-        ctrl.repoService.getIssues(ctrl.owner, ctrl.repo).subscribe(function (issues) {
-            ctrl.backlogIssues = issues;
+            ctrl.repoService.getIssues(ctrl.owner, ctrl.repo).subscribe(function (issues) {
+                ctrl.backlogIssues = issues;
+            });
+
+            this.labelService.getLabelsForRepo(this.owner,this.repo).subscribe((res) => { console.log(res); });
+
         });
 
     }
@@ -38,11 +43,19 @@ export class RepoBoardComponent {
 
         var backlogIndex = ctrl.backlogIssues.indexOf(issue);
 
-        if (backlogIndex) {
+        if (backlogIndex !== -1) {
             ctrl.backlogIssues.splice(backlogIndex, 1);
         }
 
-        destination.push(issue);
+        var currentFlowIndex = ctrl.progressIssues.indexOf(issue);
+
+        if (currentFlowIndex === -1) {
+            destination.push(issue);
+
+            // push to api
+            this.labelService.addLabelToIssue(this.owner,this.repo,issue.number,5).subscribe(() => {alert("ok!"); });
+
+        }
 
     }
 

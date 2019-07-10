@@ -1,3 +1,5 @@
+**WARNING: this repositoy is not maintained any longer**
+
 # GogsBoard
 GogsBoard is a kanban board for Gogs
 
